@@ -1,0 +1,15 @@
+schema {
+  query: Query
+}
+type Query {
+  service(id: ID!): Service
+  status(alive: Boolean): [Service]
+  alive(): [Service]
+  dead(): [Service]
+}
+type Service {
+  ID: ID!
+  name: String!
+  host: String!
+  alive: Boolean!
+}
