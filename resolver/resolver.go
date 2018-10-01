@@ -2,7 +2,8 @@ package resolver
 
 import (
 	graphql "github.com/graph-gophers/graphql-go"
-	"github.schibsted.io/Schibsted-fr-lab/graphql-poc/models"
+
+	"github.com/Depado/graphqgin/models"
 )
 
 // MainResolver is the top-level resolver for the GraphQL API
@@ -44,4 +45,23 @@ func (r *MainResolver) Alive() *[]*models.ServiceResolver {
 func (r *MainResolver) Dead() *[]*models.ServiceResolver {
 	var b bool
 	return r.Status(struct{ Alive *bool }{Alive: &b})
+}
+
+// AddService will add a service
+func (r *MainResolver) AddService(args struct {
+	ID    graphql.ID
+	Name  string
+	Host  string
+	Alive bool
+}) *models.ServiceResolver {
+	s := &models.Service{ID: args.ID, Name: args.Name, Host: args.Host, Alive: args.Alive}
+	models.AddService(s)
+	return &models.ServiceResolver{S: s}
+
+}
+
+// DeleteService will delete a service
+func (r *MainResolver) DeleteService(args struct{ ID graphql.ID }) *graphql.ID {
+	models.DeleteService(&models.Service{ID: args.ID})
+	return &args.ID
 }

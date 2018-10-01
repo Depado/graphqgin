@@ -4,11 +4,11 @@ import (
 	"io/ioutil"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sirupsen/logrus"
-	"github.schibsted.io/Schibsted-fr-lab/graphql-poc/resolver"
-
 	graphql "github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
+	"github.com/sirupsen/logrus"
+
+	"github.com/Depado/graphqgin/resolver"
 )
 
 func main() {

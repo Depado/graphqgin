@@ -1,11 +1,16 @@
 schema {
   query: Query
+  mutation: Mutation
 }
 type Query {
   service(id: ID!): Service
   status(alive: Boolean): [Service]
   alive(): [Service]
   dead(): [Service]
+}
+type Mutation {
+  deleteService(id: ID!): ID
+  addService(id: ID!, name: String!, host: String!, alive: Boolean!): Service
 }
 type Service {
   ID: ID!
