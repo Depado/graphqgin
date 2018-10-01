@@ -11,6 +11,7 @@ type Query {
 type Mutation {
   deleteService(id: ID!): ID
   addService(id: ID!, name: String!, host: String!, alive: Boolean!): Service
+  updateService(id: ID!, name: String!): Service
 }
 type Service {
   ID: ID!

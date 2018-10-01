@@ -1,6 +1,8 @@
 package resolver
 
 import (
+	"fmt"
+
 	graphql "github.com/graph-gophers/graphql-go"
 
 	"github.com/Depado/graphqgin/models"
@@ -64,4 +66,16 @@ func (r *MainResolver) AddService(args struct {
 func (r *MainResolver) DeleteService(args struct{ ID graphql.ID }) *graphql.ID {
 	models.DeleteService(&models.Service{ID: args.ID})
 	return &args.ID
+}
+
+// UpdateService will change the name of a single service, given its ID
+func (r *MainResolver) UpdateService(args struct {
+	ID   graphql.ID
+	Name string
+}) (*models.ServiceResolver, error) {
+	if s, ok := models.ServicesData[args.ID]; ok {
+		s.Name = args.Name
+		return &models.ServiceResolver{S: s}, nil
+	}
+	return nil, fmt.Errorf("not found")
 }

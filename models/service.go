@@ -24,6 +24,12 @@ var Services = ServicesSlice{
 	{ID: "3", Name: "Markdownblog", Host: "OVH", Alive: false},
 }
 
+func init() {
+	for _, s := range Services {
+		ServicesData[s.ID] = s
+	}
+}
+
 // AddService adds a service
 func AddService(s *Service) {
 	Services = append(Services, s)
@@ -64,10 +70,4 @@ func (s *ServiceResolver) Host() string {
 // Alive returns if the service is alive or not
 func (s *ServiceResolver) Alive() bool {
 	return s.S.Alive
-}
-
-func init() {
-	for _, s := range Services {
-		ServicesData[s.ID] = s
-	}
 }
